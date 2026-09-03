@@ -1,0 +1,73 @@
+$kind: http-request
+url: "{{baseUrl}}/CRM/Leads"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"CityId\": 0,\r
+
+    \    \"CountryId\": 0,\r
+
+    \    \"CreatedByUserIds\": \"\",\r
+
+    \    \"DateType\": \"ModifiedDate\",\r
+
+    \    \"From\": 1,\r
+
+    \    \"FromDate\": \"\",\r
+
+    \    \"LeadSourceIds\": \"\",\r
+
+    \    \"LeadStageIds\": \"\",\r
+
+    \    \"LeadStatus\": null,\r
+
+    \    \"LeadTypeIds\": \"\",\r
+
+    \    \"LocalityId\": \"\",\r
+
+    \    \"ReferBy\": \"\",\r
+
+    \    \"StateId\": 0,\r
+
+    \    \"StatusIds\": \"\",\r
+
+    \    \"TagIds\": \"\",\r
+
+    \    \"TerritoryIds\": \"\",\r
+
+    \    \"Text\": \"\",\r
+
+    \    \"To\": 30,\r
+
+    \    \"ToDate\": \"\",\r
+
+    \    \"UserIds\": \"\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{auth_token}}"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 201 or 200 - Customer Created\", function () {\r
+
+      \    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response validates customer addition\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    // Verifying the system returns a success flag or customer ID\r
+
+      \    pm.expect(jsonData).to.have.property(\"Status\"); \r
+
+      });"
+    language: text/javascript
+order: 3000

@@ -1,0 +1,12 @@
+name: FFC_Test_Environment
+values:
+  - key: '[https://test.fieldforceconnect.com/api](https://test.fieldforceconnect.com/api)'
+    value: ''
+  - key: valid_email
+    value: ''
+  - key: valid_pass
+    value: ''
+  - key: invalid_pass
+    value: ''
+  - key: auth_token
+    value: ''

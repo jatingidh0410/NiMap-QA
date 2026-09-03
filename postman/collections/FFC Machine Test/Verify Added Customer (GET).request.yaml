@@ -1,0 +1,71 @@
+$kind: http-request
+url: "{{baseUrl}}/CRM/Leads"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"CityId\": 0,\r
+
+    \    \"CountryId\": 0,\r
+
+    \    \"From\": 1,\r
+
+    \    \"LeadSourceIds\": \"\",\r
+
+    \    \"LeadStageIds\": \"\",\r
+
+    \    \"LeadTypeIds\": \"\",\r
+
+    \    \"LocalityId\": \"\",\r
+
+    \    \"StateId\": 0,\r
+
+    \    \"StatusIds\": \"\",\r
+
+    \    \"TagIds\": \"\",\r
+
+    \    \"TerritoryIds\": \"\",\r
+
+    \    \"Text\": \"\",\r
+
+    \    \"To\": 30,\r
+
+    \    \"UserIds\": \"\",\r
+
+    \    \"ReferBy\": \"\",\r
+
+    \    \"FromDate\": \"\",\r
+
+    \    \"ToDate\": \"\",\r
+
+    \    \"DateType\": \"ModifiedDate\",\r
+
+    \    \"CreatedByUserIds\": \"\",\r
+
+    \    \"LeadStatus\": null\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{auth_token}}"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Customer list is fetched successfully\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData).to.be.an(\"object\"); // or \"array\" depending on API\r
+
+      });"
+    language: text/javascript
+order: 4000
